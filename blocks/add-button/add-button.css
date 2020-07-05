@@ -1,0 +1,35 @@
+@import url('./__image/add-button__image.css');
+
+.add-button {
+  background: #000;
+  width: 150px;
+  height: 50px;
+  border: 2px #fff solid;
+  box-sizing: border-box;
+  border-radius: 2px;
+  display: flex;
+  cursor: pointer;
+  padding: 0;
+  transition: 0.3s 0s opacity ease-in;
+}
+
+.add-button:focus {
+  outline: none;
+}
+
+.add-button:hover {
+  opacity: .6;
+}
+
+@media screen and (max-width: 720px) {
+  .add-button {
+    margin-top: 36px;
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .add-button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="третья проектная работа Никиты Галушкина на Яндекс Практикуме">
+    <meta name="keywords" content="html, css, js">
+    <meta name="author" content="Никита Галушкин">
+    <title>Mesto Russia</title>
+    <link rel="stylesheet" href="./pages/index.css">
+  </head>
+  <body class="page">
+    <!--page__container-->
+    <div class="page__container">
+      <!--header-->
+      <header class="header page__header section">
+        <div class="logo header__logo">
+          <!--Можно лучше: сделать ссылкой-->
+          <img class="logo__image" src="./images/logo-header.svg" alt="Логотип">
+        </div>
+        <div class="header__line"></div>
+      </header>
+      <!--header end-->
+      <!--content-->
+      <main class="content page__content">
+        <!--section profile-->
+        <section class="profile section content__section">
+          
+          <div class="profile__info">
+            <img src="./images/profile-image.jpg" alt="фото" class="profile__image">
+            <div class="profile__edit">
+            <h1 class="profile__title">
+              Жак-Ив Кусто
+            </h1>
+            <p class="profile__subtitle">
+              Исследователь океана
+            </p>
+            <button class="edit-button">
+              <span class="edit-button__image"></span>
+            </button>
+            </div>
+          </div>
+          <button class="add-button">
+            <span class="add-button__image"></span>
+          </button>
+        </section>
+        <!--section profile end-->
+        <!--section elements-->
+        <section class="elements section content__section">
+          <ul class="elements__list">
+            <li class="element">
+              <img src="./images/element-karachaevsk.jpg" alt="фото Карачаевск" class="element__image">
+              <h2 class="element__title">Карачаевск</h2>
+              <button class="element__group"></button>
+            </li>
+            <li class="element">
+              <img src="./images/element-gora-elbrus.jpg" alt="фото Гора Эльбрус" class="element__image">
+              <h2 class="element__title">Гора Эльбрус</h2>
+              <button class="element__group"></button>
+            </li>
+            <li class="element">
+              <img src="./images/element-dombay.jpg" alt="фото Домбай" class="element__image">
+              <h2 class="element__title">Домбай</h2>
+              <button class="element__group"></button>
+            </li>
+            <li class="element">
+              <img src="./images/element-gora-elbrus.jpg" alt="фото Гора Эльбрус" class="element__image">
+              <h2 class="element__title">Гора Эльбрус</h2>
+              <button class="element__group"></button>
+            </li>
+            <li class="element">
+              <img src="./images/element-dombay.jpg" alt="фото Домбай" class="element__image">
+              <h2 class="element__title">Домбай</h2>
+              <button class="element__group"></button>
+            </li>
+            <li class="element">
+              <img src="./images/element-karachaevsk.jpg" alt="фото Карачаевск" class="element__image">
+              <h2 class="element__title">Карачаево-Черкесия</h2>
+              <button class="element__group"></button>
+            </li>
+          </ul>
+        </section>
+        <!--section elements end-->
+      </main>
+      <!--content end-->
+      <!--footer-->
+      <footer class="footer page__footer section">
+        <p class="footer__copyright">
+          &copy; 2020 Mesto Russia
+        </p>
+      </footer>
+      <!--footer end-->
+    </div>
+    <!--page__container end-->
+    <!--modal-->
+    <div class="modal">
+      <div class="modal__container">
+        <button class="modal__close-button"></button>
+        <h2 class="modal__title">Редактировать профиль</h2>
+        <form class="form" action="#">
+          <fieldset class="form__input-container">
+            <input type="text" class="form__item form__item_type_name" name="name" value="Жак-Ив Кусто" placeholder="ФИО" required>
+            <input type="text" class="form__item form__item_type_profession" name="profession" value="Исследователь океана" placeholder="Профессия" required>
+            <button type="submit" class="form__button">Сохранить</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <!--modal end-->
+    <script src="./index.js"></script>
+  </body>
+</html>

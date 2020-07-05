@@ -1,0 +1,11 @@
+@import url('./__image/element__image.css');
+@import url('./__title/element__title.css');
+@import url('./__group/element__group.css');
+
+.element {
+  background: #fff;
+  border-radius: 10px;
+  width: 100%;
+  max-height: 361px;
+  position: relative;
+}
