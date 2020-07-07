@@ -1,7 +1,4 @@
-@import url('./_type/form__item_type_name.css');
-@import url('./_type/form__item_type_profession.css');
-
-.form__item {
+.modal__item {
   padding: 0;
   border: 0;
   width: 100%;
@@ -17,6 +14,10 @@
   font-family: inherit;
 }
 
-.form__item:focus {
+.modal__item:focus {
   outline: none;
+}
+
+.modal__item:nth-child(2) {
+  margin-top: 30px;
 }

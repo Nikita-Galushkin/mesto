@@ -21,13 +21,6 @@
   }
 }
 
-@media screen and (max-width: 768px) {
-  .elements__list {
-    grid-template-columns: repeat(2, minmax(min-content, 1fr));
-    grid-template-rows: repeat(3, minmax(min-content, 1fr));
-  }
-}
-
 @media screen and (max-width: 600px) {
   .elements__list {
     grid-template-columns: repeat(1, minmax(min-content, 1fr));

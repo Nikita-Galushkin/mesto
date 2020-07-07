@@ -2,7 +2,7 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="третья проектная работа Никиты Галушкина на Яндекс Практикуме">
     <meta name="keywords" content="html, css, js">
@@ -15,31 +15,28 @@
     <div class="page__container">
       <!--header-->
       <header class="header page__header section">
-        <div class="logo header__logo">
-          <!--Можно лучше: сделать ссылкой-->
-          <img class="logo__image" src="./images/logo-header.svg" alt="Логотип">
-        </div>
-        <div class="header__line"></div>
+        <!--Можно лучше: сделать ссылкой-->
+        <img class="logo logo__image" src="./images/logo-header.svg" alt="Логотип">
       </header>
       <!--header end-->
       <!--content-->
       <main class="content page__content">
         <!--section profile-->
         <section class="profile section content__section">
-          
           <div class="profile__info">
-            <img src="./images/profile-image.jpg" alt="фото" class="profile__image">
-            <div class="profile__edit">
-            <h1 class="profile__title">
-              Жак-Ив Кусто
-            </h1>
-            <p class="profile__subtitle">
-              Исследователь океана
-            </p>
-            <button class="edit-button">
-              <span class="edit-button__image"></span>
-            </button>
-            </div>
+          <img src="./images/profile-image.jpg" alt="фото" class="profile__image">
+          <div class="profile__edit">
+            
+            <div class="profile__text">
+              <h1 class="profile__title">
+                Жак-Ив Кусто
+              </h1>
+              <p class="profile__subtitle">
+                Исследователь океана
+              </p>
+              
+            </div><button class="profile__edit-button" type="submit"></button>
+          </div>
           </div>
           <button class="add-button">
             <span class="add-button__image"></span>
@@ -98,16 +95,16 @@
       <div class="modal__container">
         <button class="modal__close-button"></button>
         <h2 class="modal__title">Редактировать профиль</h2>
-        <form class="form" action="#">
-          <fieldset class="form__input-container">
-            <input type="text" class="form__item form__item_type_name" name="name" value="Жак-Ив Кусто" placeholder="ФИО" required>
-            <input type="text" class="form__item form__item_type_profession" name="profession" value="Исследователь океана" placeholder="Профессия" required>
-            <button type="submit" class="form__button">Сохранить</button>
+        <form class="modal__form" action="#" name="modal__form">
+          <fieldset class="modal__input-container">
+            <input type="text" class="modal__item form__item_type_name" name="name" value="Жак-Ив Кусто" placeholder="ФИО" required>
+            <input type="text" class="modal__item form__item_type_profession" name="profession" value="Исследователь океана" placeholder="Профессия" required>
+            <button type="submit" class="modal__button">Сохранить</button>
           </fieldset>
         </form>
       </div>
     </div>
     <!--modal end-->
-    <script src="./index.js"></script>
+    <script src="./javascript/index.js"></script>
   </body>
 </html>

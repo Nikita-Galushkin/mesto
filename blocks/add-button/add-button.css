@@ -24,12 +24,6 @@
 @media screen and (max-width: 720px) {
   .add-button {
     margin-top: 36px;
-    width: 300px;
-  }
-}
-
-@media screen and (max-width: 425px) {
-  .add-button {
     width: 100%;
   }
 }

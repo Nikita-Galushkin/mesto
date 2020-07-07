@@ -19,3 +19,7 @@
 .element__group:focus {
   outline: none;
 }
+
+.element__group:hover {
+  opacity: .8;
+}
