@@ -1,28 +1,30 @@
-@import url('./__image/add-button__image.css');
-
-.add-button {
+.profile__add-button {
   background: #000;
   width: 150px;
   height: 50px;
   border: 2px #fff solid;
   box-sizing: border-box;
   border-radius: 2px;
-  display: flex;
   cursor: pointer;
   padding: 0;
   transition: 0.3s 0s opacity ease-in;
+  background-image: url('../../../images/profile-add-button.svg');
+  background-size: 22px 22px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
 }
 
-.add-button:focus {
+.profile__add-button:focus {
   outline: none;
 }
 
-.add-button:hover {
+.profile__add-button:hover {
   opacity: .6;
 }
 
 @media screen and (max-width: 720px) {
-  .add-button {
+  .profile__add-button {
     margin-top: 36px;
     width: 100%;
   }

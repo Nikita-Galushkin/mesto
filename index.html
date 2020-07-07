@@ -16,7 +16,7 @@
       <!--header-->
       <header class="header page__header section">
         <!--Можно лучше: сделать ссылкой-->
-        <img class="logo logo__image" src="./images/logo-header.svg" alt="Логотип">
+        <img class="logo header__logo" src="./images/logo-header.svg" alt="Логотип">
       </header>
       <!--header end-->
       <!--content-->
@@ -26,7 +26,6 @@
           <div class="profile__info">
           <img src="./images/profile-image.jpg" alt="фото" class="profile__image">
           <div class="profile__edit">
-            
             <div class="profile__text">
               <h1 class="profile__title">
                 Жак-Ив Кусто
@@ -34,13 +33,11 @@
               <p class="profile__subtitle">
                 Исследователь океана
               </p>
-              
-            </div><button class="profile__edit-button" type="submit"></button>
+            </div>
+            <button class="profile__edit-button" type="button"></button>
           </div>
           </div>
-          <button class="add-button">
-            <span class="add-button__image"></span>
-          </button>
+          <button class="profile__add-button" type="button"></button>
         </section>
         <!--section profile end-->
         <!--section elements-->
@@ -49,32 +46,32 @@
             <li class="element">
               <img src="./images/element-karachaevsk.jpg" alt="фото Карачаевск" class="element__image">
               <h2 class="element__title">Карачаевск</h2>
-              <button class="element__group"></button>
+              <button class="element__group" type="button"></button>
             </li>
             <li class="element">
               <img src="./images/element-gora-elbrus.jpg" alt="фото Гора Эльбрус" class="element__image">
               <h2 class="element__title">Гора Эльбрус</h2>
-              <button class="element__group"></button>
+              <button class="element__group" type="button"></button>
             </li>
             <li class="element">
               <img src="./images/element-dombay.jpg" alt="фото Домбай" class="element__image">
               <h2 class="element__title">Домбай</h2>
-              <button class="element__group"></button>
+              <button class="element__group" type="button"></button>
             </li>
             <li class="element">
               <img src="./images/element-gora-elbrus.jpg" alt="фото Гора Эльбрус" class="element__image">
               <h2 class="element__title">Гора Эльбрус</h2>
-              <button class="element__group"></button>
+              <button class="element__group" type="button"></button>
             </li>
             <li class="element">
               <img src="./images/element-dombay.jpg" alt="фото Домбай" class="element__image">
               <h2 class="element__title">Домбай</h2>
-              <button class="element__group"></button>
+              <button class="element__group" type="button"></button>
             </li>
             <li class="element">
               <img src="./images/element-karachaevsk.jpg" alt="фото Карачаевск" class="element__image">
               <h2 class="element__title">Карачаево-Черкесия</h2>
-              <button class="element__group"></button>
+              <button class="element__group" type="button"></button>
             </li>
           </ul>
         </section>
@@ -93,12 +90,12 @@
     <!--modal-->
     <div class="modal">
       <div class="modal__container">
-        <button class="modal__close-button"></button>
+        <button class="modal__close-button" type="button"></button>
         <h2 class="modal__title">Редактировать профиль</h2>
         <form class="modal__form" action="#" name="modal__form">
           <fieldset class="modal__input-container">
-            <input type="text" class="modal__item form__item_type_name" name="name" value="Жак-Ив Кусто" placeholder="ФИО" required>
-            <input type="text" class="modal__item form__item_type_profession" name="profession" value="Исследователь океана" placeholder="Профессия" required>
+            <input type="text" class="modal__item modal__item_type_name" name="name" value="Жак-Ив Кусто" placeholder="ФИО" required>
+            <input type="text" class="modal__item modal__item_type_profession" name="profession" value="Исследователь океана" placeholder="Профессия" required>
             <button type="submit" class="modal__button">Сохранить</button>
           </fieldset>
         </form>
