@@ -7,10 +7,11 @@
   padding: 36px;
   box-sizing: border-box;
   position: relative;
+  margin: 0;
 }
 
 @media screen and (max-width: 768px) {
-  .modal__container  {
-    margin: 19px;
+  .modal__container {
+    margin: 40px;
   }
 }

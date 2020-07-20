@@ -43,36 +43,42 @@
         <!--section elements-->
         <section class="elements section content__section">
           <ul class="elements__list">
-            <li class="element">
+            <!--<li class="element">
               <img src="./images/element-karachaevsk.jpg" alt="фото Карачаевск" class="element__image">
               <h2 class="element__title">Карачаевск</h2>
               <button class="element__group" type="button"></button>
+              <button class="element__trash" type="button"></button>
             </li>
             <li class="element">
               <img src="./images/element-gora-elbrus.jpg" alt="фото Гора Эльбрус" class="element__image">
               <h2 class="element__title">Гора Эльбрус</h2>
               <button class="element__group" type="button"></button>
+              <button class="element__trash" type="button"></button>
             </li>
             <li class="element">
               <img src="./images/element-dombay.jpg" alt="фото Домбай" class="element__image">
               <h2 class="element__title">Домбай</h2>
               <button class="element__group" type="button"></button>
+              <button class="element__trash" type="button"></button>
             </li>
             <li class="element">
               <img src="./images/element-gora-elbrus.jpg" alt="фото Гора Эльбрус" class="element__image">
               <h2 class="element__title">Гора Эльбрус</h2>
               <button class="element__group" type="button"></button>
+              <button class="element__trash" type="button"></button>
             </li>
             <li class="element">
               <img src="./images/element-dombay.jpg" alt="фото Домбай" class="element__image">
               <h2 class="element__title">Домбай</h2>
               <button class="element__group" type="button"></button>
+              <button class="element__trash" type="button"></button>
             </li>
             <li class="element">
               <img src="./images/element-karachaevsk.jpg" alt="фото Карачаевск" class="element__image">
               <h2 class="element__title">Карачаево-Черкесия</h2>
               <button class="element__group" type="button"></button>
-            </li>
+              <button class="element__trash" type="button"></button>
+            </li>-->
           </ul>
         </section>
         <!--section elements end-->
@@ -88,11 +94,11 @@
     </div>
     <!--page__container end-->
     <!--modal-->
-    <div class="modal">
+    <div class="modal modal_type_edit-profile">
       <div class="modal__container">
-        <button class="modal__close-button" type="button"></button>
+        <button class="modal__close-button modal__close-button_type_edit" type="button"></button>
         <h2 class="modal__title">Редактировать профиль</h2>
-        <form class="modal__form" action="#" name="modal__form">
+        <form class="modal__form modal__form_type_edit" action="#" name="modal__form">
           <fieldset class="modal__input-container">
             <input type="text" class="modal__item modal__item_type_name" name="name" value="Жак-Ив Кусто" placeholder="ФИО" required>
             <input type="text" class="modal__item modal__item_type_profession" name="profession" value="Исследователь океана" placeholder="Профессия" required>
@@ -101,7 +107,39 @@
         </form>
       </div>
     </div>
+    <div class="modal modal_type_add-card">
+      <div class="modal__container">
+        <button class="modal__close-button modal__close-button_type_add" type="button"></button>
+        <h2 class="modal__title">Новое место</h2>
+        <form class="modal__form modal__form_type_add" action="#" name="modal__form">
+          <fieldset class="modal__input-container">
+            <input type="text" class="modal__item modal__item_type_place" name="place" value="" placeholder="Название" required>
+            <input type="" class="modal__item modal__item_type_link-place" name="link-place" value="" placeholder="Ссылка на картинку" required>
+            <button type="submit" class="modal__button">Создать</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <div class="modal modal_type_photo">
+      <div class="modal__container-photo">
+        <button class="modal__close-button modal__close-button_type_photo" type="button"></button>
+        <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg" alt="фото" class="modal__photo">
+        <p class="modal__text">Фото</p>
+      </div>
+    </div>
     <!--modal end-->
+    <!--template-->
+    <template id="element-template">
+      <li class="element">
+        <button class="element__photo" type="button">
+          <img src="" alt="фото" class="element__image">
+        </button>
+        <h2 class="element__title"></h2>
+        <button class="element__group" type="button"></button>
+        <button class="element__trash" type="button"></button>
+      </li>
+    </template>
+    <!--template end-->
     <script src="./javascript/index.js"></script>
   </body>
 </html>

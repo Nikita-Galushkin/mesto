@@ -1,25 +1,25 @@
-.element__group {
+.element__trash {
   box-sizing: border-box;
   border: 0;
-  width: 20px;
-  height: 18px;
-  background-image: url('../../../images/element-group.svg');
+  width: 18px;
+  height: 19px;
+  background-image: url('../../../images/element-trash.svg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-color: transparent;
   cursor: pointer;
   position: absolute;
-  bottom: 30px;
-  right: 30px;
+  top: 18px;
+  right: 15px;
   padding: 0;
   transition: 0.3s 0s opacity ease-in;
 }
 
-.element__group:focus {
+.element__trash:focus {
   outline: none;
 }
 
-.element__group:hover {
+.element__trash:hover {
   opacity: .6;
 }
