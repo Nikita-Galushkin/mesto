@@ -90,11 +90,12 @@ function newCard(link, name) {
   cardElement.querySelector('.element__trash').addEventListener('click', removeElement);
   elementPhoto.addEventListener('click', togglePhotoModal);
   elementPhoto.addEventListener('click', photoElement);
-  addCard(cardElement);
+  return cardElement;
 }
 
 initialCards.forEach(function (item) {
-  newCard(item.link, item.name);
+  const arrCard = newCard(item.link, item.name);
+  addCard(arrCard);
 });
 
 function toggleEditModal() {
@@ -121,7 +122,7 @@ function openEditModal() {
 }
 
 function saveEditModal(event) {
-  event.preventDefault(); 
+  event.preventDefault();
   nameText.textContent = inputName.value;
   professionText.textContent = inputProfession.value;
   toggleEditModal();
@@ -129,7 +130,8 @@ function saveEditModal(event) {
 
 function saveAddModal(event) {
   event.preventDefault();
-  newCard(inputLink.value, inputPlace.value);
+  const card = newCard(inputLink.value, inputPlace.value);
+  addCard(card);
   clearValue();
   closeAddModal();
 }
