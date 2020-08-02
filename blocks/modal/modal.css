@@ -4,7 +4,11 @@
 @import url('./__form/modal__form.css');
 @import url('./__input-container/modal__input-container.css');
 @import url('./__item/modal__item.css');
+@import url('./__item/_type/modal__item_type_error.css');
+@import url('./__item-error/modal__item-error.css');
+@import url('./__item-error/_active/modal__item-error_active.css');
 @import url('./__button/modal__button.css');
+@import url('./__button/_disabled/modal__button_disabled.css');
 @import url('./__container-photo/modal__container-photo.css');
 @import url('./__photo/modal__photo.css');
 @import url('./__text/modal__text.css');

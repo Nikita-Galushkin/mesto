@@ -61,12 +61,18 @@
       <div class="modal__container">
         <button class="modal__close-button modal__close-button_type_edit" type="button"></button>
         <h2 class="modal__title">Редактировать профиль</h2>
-        <form class="modal__form modal__form_type_edit" action="#" name="modal__form">
-          <fieldset class="modal__input-container">
-            <input type="text" class="modal__item modal__item_type_name" name="name" value="Жак-Ив Кусто" placeholder="ФИО" required>
-            <input type="text" class="modal__item modal__item_type_profession" name="profession" value="Исследователь океана" placeholder="Профессия" required>
-            <button type="submit" class="modal__button">Сохранить</button>
-          </fieldset>
+        <form class="modal__form" action="#" name="modal_edit_form" novalidate>
+          <!-- <fieldset class="modal__input-container"> -->
+            <label>
+            <input type="text" class="modal__item modal__item_type_name" name="name" value="Жак-Ив Кусто" placeholder="ФИО" required minlength="2" maxlength="40">
+            <span id="name-error" class="modal__item-error"></span>
+            </label>
+            <label>
+            <input type="text" class="modal__item modal__item_type_profession" name="profession" value="Исследователь океана" placeholder="Профессия" required minlength="2" maxlength="200">
+            <span id="profession-error" class="modal__item-error"></span>
+            </label>
+            <button type="submit" class="modal__button modal__button_action">Сохранить</button>
+          <!-- </fieldset> -->
         </form>
       </div>
     </div>
@@ -74,12 +80,18 @@
       <div class="modal__container">
         <button class="modal__close-button modal__close-button_type_add" type="button"></button>
         <h2 class="modal__title">Новое место</h2>
-        <form class="modal__form modal__form_type_add" action="#" name="modal__form">
-          <fieldset class="modal__input-container">
-            <input type="text" class="modal__item modal__item_type_place" name="place" value="" placeholder="Название" required>
-            <input type="" class="modal__item modal__item_type_link-place" name="link-place" value="" placeholder="Ссылка на картинку" required>
-            <button type="submit" class="modal__button">Создать</button>
-          </fieldset>
+        <form class="modal__form" action="#" name="modal_add_form" novalidate>
+          <!-- <fieldset class="modal__input-container"> -->
+            <label>
+            <input type="text" class="modal__item modal__item_type_place" name="place" value="" placeholder="Название" required minlength="1" maxlength="30">
+            <span id="place-error" class="modal__item-error"></span>
+            </label>
+            <label>
+            <input type="url" class="modal__item modal__item_type_link-place" name="link_place" value="" placeholder="Ссылка на картинку" required>
+            <span id="link_place-error" class="modal__item-error"></span>
+            </label>
+            <button type="submit" class="modal__button modal__button_action modal__button_disabled" disabled>Создать</button>
+          <!-- </fieldset> -->
         </form>
       </div>
     </div>
@@ -104,5 +116,6 @@
     </template>
     <!--template end-->
     <script src="./javascript/index.js"></script>
+    <script src="./javascript/validate.js"></script>
   </body>
 </html>
