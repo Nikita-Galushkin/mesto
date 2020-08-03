@@ -7,6 +7,15 @@ const obj = {
   inputTypeErrorClass: 'modal__item_type_error'
 };
 
+function resetForm(formsElement, modalButton) {
+  const inputs = Array.from(formsElement.querySelectorAll('.modal__item'));
+  inputs.forEach(function (inputsElement) {
+    inputsElement.classList.remove('modal__item_type_error');
+    showError(formsElement, inputsElement, obj);
+    toggleButtonState(inputs, modalButton, obj)
+  });
+}
+
 function enableValidation(obj) {
   const forms = Array.from(document.querySelectorAll(obj.formSelector));
   forms.forEach(function (formsElement) {

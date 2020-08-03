@@ -27,64 +27,6 @@ const formEditModal = document.forms.modal_edit_form;
 const nameFormEdit = formEditModal.elements.name;
 const professionFormEdit = formEditModal.elements.profession;
 
-const initialCards = [
-  {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
-function resetForm(formsElement) {
-  const inputs = Array.from(formsElement.querySelectorAll('.modal__item'));
-  inputs.forEach(function (inputsElement) {
-    inputsElement.classList.remove('modal__item_type_error');
-
-    const errorElements = formsElement.querySelector(`#${inputsElement.name}-error`);
-    errorElements.classList.remove('modal__item-error_active');
-    errorElements.textContent = '';
-    
-    // const modalButton = formsElement.querySelector('.modal__button');
-    // modalButton.classList.remove('modal__button_disabled');
-    // modalButton.disabled = false;
-  });
-  // resetInputs(formsElement, inputsElement);
-}
-
-// function resetInputs(formsElement, inputsElement) {
-//   const errorInputElements = Array.from(formsElement.querySelector(`#${inputsElement.name}-error`));
-//   errorInputElements.forEach(function (errorElements) {
-//     errorElements.classList.remove('modal__item-error_active');
-//   });
-//   resetButton(formsElement);
-// }
-
-function resetButton(formsElement) {
-  const modalButton = formsElement.querySelector('.modal__button');
-  modalButton.classList.remove('modal__button_disabled');
-  modalButton.disabled = false;
-}
-
-
 function addCard(card) {
   elementContainer.prepend(card);
 }
@@ -120,86 +62,6 @@ function toggleModal(modal) {
   modal.classList.toggle('modal_open');
 }
 
-function openEditModal() {
-  addEventKeydown();
-  toggleEditModal();
-  nameFormEdit.value = nameText.innerText;
-  professionFormEdit.value = professionText.innerText;
-}
-
-function closeEditModal() {
-  removeEventKeydown();
-  toggleEditModal();
-  resetForm(editModal);
-  resetButton(editModal);
-}
-
-function toggleEditModal() {
-  toggleModal(editModal);
-}
-
-function saveEditModal(evt) {
-  evt.preventDefault();
-  nameText.textContent = nameFormEdit.value;
-  professionText.textContent = professionFormEdit.value;
-  toggleEditModal();
-}
-
-function clearValue() {
-  formAddModal.reset();
-}
-
-function toggleAddModal() {
-  addEventKeydown();
-  toggleModal(addModal);
-}
-
-function closeAddModal() {
-  toggleAddModal();
-  clearValue();
-  removeEventKeydown();
-  resetForm(addModal);
-}
-
-function saveAddModal(evt) {
-  evt.preventDefault();
-  const card = newCard(linkPlaceFormAdd.value, placeFormAdd.value);       //(inputLink.value, inputPlace.value);//заменить параметры на параметры из формы
-  addCard(card);
-  closeAddModal();
-  clearValue();
-}
-
-function openPhotoModal() {
-  addEventKeydown();
-  toggleModal(photoModal);
-}
-
-function closePhotoModal() {
-  removeEventKeydown();
-  toggleModal(photoModal);
-}
-
-function photoElement(evt) {
-  openPhoto.src = evt.target.getAttribute('src');
-  textPhoto.textContent = evt.target.getAttribute('alt');
-}
-
-function addEventKeydown() {
-  document.addEventListener('keydown', keyHandler);
-}
-function removeEventKeydown() {
-  document.removeEventListener('keydown', keyHandler);
-}
-
-function keydownCloseModals() {
-  addModal.classList.remove('modal_open');
-  editModal.classList.remove('modal_open');
-  photoModal.classList.remove('modal_open');
-  resetForm(addModal);
-  resetForm(editModal);
-  resetButton(editModal);
-}
-
 function closeOnOverlay(evt) {
   const forms = Array.from(document.querySelectorAll('.modal_open'));
   forms.forEach(function (items) {
@@ -209,28 +71,103 @@ function closeOnOverlay(evt) {
   });
 }
 
-function keyHandler(evt) {
-  if (evt.key === 'Escape') {
-    keydownCloseModals();
-  }
-}
-
 function keyEnter(evt) {
   if (evt.key === 'Enter') {
     saveAddModal(evt);
   }
 }
 
-document.addEventListener('click', closeOnOverlay);
+function openEditModal() {
+  editModal.addEventListener('click', closeOnOverlay);
+  document.addEventListener('keydown', keyHandlerEditModal);
+  toggleModal(editModal);
+  nameFormEdit.value = nameText.innerText;
+  professionFormEdit.value = professionText.innerText;
+  resetForm(editModal, editFormButton);
+}
 
-placeFormAdd.addEventListener('keydown', keyEnter);
-linkPlaceFormAdd.addEventListener('keydown', keyEnter);
+function closeEditModal() {
+  editModal.removeEventListener('click', closeOnOverlay);
+  document.removeEventListener('keydown', keyHandlerEditModal);
+  toggleModal(editModal);
+}
+
+function saveEditModal(evt) {
+  evt.preventDefault();
+  nameText.textContent = nameFormEdit.value;
+  professionText.textContent = professionFormEdit.value;
+  toggleModal(editModal);
+}
+
+function keyHandlerEditModal(evt) {
+  if (evt.key === 'Escape') {
+    editModal.classList.remove('modal_open');
+  }
+}
+
+function clearValue() {
+  formAddModal.reset();
+}
+
+function openAddModal() {
+  addModal.addEventListener('click', closeOnOverlay);
+  document.addEventListener('keydown', keyHandlerAddModal);
+  toggleModal(addModal);
+  clearValue();
+  resetForm(addModal, addFormButton);
+}
+
+function closeAddModal() {
+  addModal.removeEventListener('click', closeOnOverlay);
+  document.removeEventListener('keydown', keyHandlerAddModal);
+  toggleModal(addModal);
+}
+
+function saveAddModal(evt) {
+  evt.preventDefault();
+  const card = newCard(linkPlaceFormAdd.value, placeFormAdd.value);
+  addCard(card);
+  closeAddModal();
+  clearValue();
+}
+
+function keyHandlerAddModal(evt) {
+  if (evt.key === 'Escape') {
+    addModal.classList.remove('modal_open');
+  }
+}
+
+function openPhotoModal() {
+  photoModal.addEventListener('click', closeOnOverlay);
+  document.addEventListener('keydown', keyHandlerPhotoModal);
+  toggleModal(photoModal);
+}
+
+function closePhotoModal() {
+  photoModal.removeEventListener('click', closeOnOverlay);
+  document.removeEventListener('keydown', keyHandlerPhotoModal);
+  toggleModal(photoModal);
+}
+
+function photoElement(evt) {
+  openPhoto.src = evt.target.getAttribute('src');
+  textPhoto.textContent = evt.target.getAttribute('alt');
+}
+
+function keyHandlerPhotoModal(evt) {
+  if (evt.key === 'Escape') {
+    photoModal.classList.remove('modal_open');
+  }
+}
+
+placeFormAdd.addEventListener('submit', keyEnter);
+linkPlaceFormAdd.addEventListener('submit', keyEnter);
 
 openEditButton.addEventListener('click', openEditModal);
 closeEditButton.addEventListener('click', closeEditModal);
 formEditModal.addEventListener('submit', saveEditModal);
 
-openAddButton.addEventListener('click', toggleAddModal);
+openAddButton.addEventListener('click', openAddModal);
 closeAddButton.addEventListener('click', closeAddModal);
 formAddModal.addEventListener('submit', saveAddModal);
 
