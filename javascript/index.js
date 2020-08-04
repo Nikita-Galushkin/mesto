@@ -59,16 +59,28 @@ function removeElement(evt) {
 }
 
 function toggleModal(modal) {
-  modal.classList.toggle('modal_open');
+  modal.classList.toggle('modal_opened');
+  if (modal.classList.contains('modal_opened')) {
+    document.addEventListener('keydown', keyEscapeHandler);
+    document.addEventListener('click', closeOnOverlay);
+  } else {
+    document.removeEventListener('keydown', keyEscapeHandler);
+    document.removeEventListener('click', closeOnOverlay);
+  }
 }
 
 function closeOnOverlay(evt) {
-  const forms = Array.from(document.querySelectorAll('.modal_open'));
-  forms.forEach(function (items) {
-    if ( evt.target === items) {
-      items.classList.remove('modal_open');
-    }
-  });
+  const openedModal = document.querySelector('.modal_opened');
+  if ( evt.target === openedModal) { 
+    toggleModal(openedModal);
+  } 
+}
+
+function keyEscapeHandler(evt) {
+  if (evt.key === 'Escape') {
+    const openedModal = document.querySelector('.modal_opened');
+    toggleModal(openedModal);
+  } 
 }
 
 function keyEnter(evt) {
@@ -78,8 +90,6 @@ function keyEnter(evt) {
 }
 
 function openEditModal() {
-  editModal.addEventListener('click', closeOnOverlay);
-  document.addEventListener('keydown', keyHandlerEditModal);
   toggleModal(editModal);
   nameFormEdit.value = nameText.innerText;
   professionFormEdit.value = professionText.innerText;
@@ -87,8 +97,6 @@ function openEditModal() {
 }
 
 function closeEditModal() {
-  editModal.removeEventListener('click', closeOnOverlay);
-  document.removeEventListener('keydown', keyHandlerEditModal);
   toggleModal(editModal);
 }
 
@@ -99,27 +107,17 @@ function saveEditModal(evt) {
   toggleModal(editModal);
 }
 
-function keyHandlerEditModal(evt) {
-  if (evt.key === 'Escape') {
-    editModal.classList.remove('modal_open');
-  }
-}
-
 function clearValue() {
   formAddModal.reset();
 }
 
 function openAddModal() {
-  addModal.addEventListener('click', closeOnOverlay);
-  document.addEventListener('keydown', keyHandlerAddModal);
   toggleModal(addModal);
   clearValue();
   resetForm(addModal, addFormButton);
 }
 
 function closeAddModal() {
-  addModal.removeEventListener('click', closeOnOverlay);
-  document.removeEventListener('keydown', keyHandlerAddModal);
   toggleModal(addModal);
 }
 
@@ -131,21 +129,11 @@ function saveAddModal(evt) {
   clearValue();
 }
 
-function keyHandlerAddModal(evt) {
-  if (evt.key === 'Escape') {
-    addModal.classList.remove('modal_open');
-  }
-}
-
 function openPhotoModal() {
-  photoModal.addEventListener('click', closeOnOverlay);
-  document.addEventListener('keydown', keyHandlerPhotoModal);
   toggleModal(photoModal);
 }
 
 function closePhotoModal() {
-  photoModal.removeEventListener('click', closeOnOverlay);
-  document.removeEventListener('keydown', keyHandlerPhotoModal);
   toggleModal(photoModal);
 }
 
@@ -153,15 +141,6 @@ function photoElement(evt) {
   openPhoto.src = evt.target.getAttribute('src');
   textPhoto.textContent = evt.target.getAttribute('alt');
 }
-
-function keyHandlerPhotoModal(evt) {
-  if (evt.key === 'Escape') {
-    photoModal.classList.remove('modal_open');
-  }
-}
-
-placeFormAdd.addEventListener('submit', keyEnter);
-linkPlaceFormAdd.addEventListener('submit', keyEnter);
 
 openEditButton.addEventListener('click', openEditModal);
 closeEditButton.addEventListener('click', closeEditModal);
