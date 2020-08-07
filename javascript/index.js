@@ -27,6 +27,7 @@ const formEditModal = document.forms.modal_edit_form;
 const nameFormEdit = formEditModal.elements.name;
 const professionFormEdit = formEditModal.elements.profession;
 
+
 function addCard(card) {
   elementContainer.prepend(card);
 }
@@ -45,7 +46,9 @@ function newCard(link, name) {
   cardElement.querySelector('.element__title').textContent = name;
   cardElement.querySelector('.element__group').addEventListener('click', toggleLike);
   cardElement.querySelector('.element__trash').addEventListener('click', removeElement);
-  elementPhoto.addEventListener('click', openPhotoModal);
+  elementPhoto.addEventListener('click', function () {
+    openModals(photoModal);
+  });
   elementPhoto.addEventListener('click', photoElement);
   return cardElement;
 }
@@ -58,53 +61,44 @@ function removeElement(evt) {
   evt.target.closest('.element').remove();
 }
 
-function toggleModal(modal) {
-  modal.classList.toggle('modal_opened');
-  if (modal.classList.contains('modal_opened')) {
-    document.addEventListener('keydown', keyEscapeHandler);
-    document.addEventListener('click', closeOnOverlay);
-  } else {
-    document.removeEventListener('keydown', keyEscapeHandler);
-    document.removeEventListener('click', closeOnOverlay);
-  }
+function openModals(modal) {
+  modal.classList.add('modal_opened');
+  document.addEventListener('keydown', keyEscapeHandler);
+  document.addEventListener('click', closeOnOverlay);
+}
+
+function closeModals(modal) {
+  modal.classList.remove('modal_opened');
+  document.removeEventListener('keydown', keyEscapeHandler);
+  document.removeEventListener('click', closeOnOverlay);
 }
 
 function closeOnOverlay(evt) {
   const openedModal = document.querySelector('.modal_opened');
   if ( evt.target === openedModal) { 
-    toggleModal(openedModal);
+    closeModals(openedModal);
   } 
 }
 
 function keyEscapeHandler(evt) {
   if (evt.key === 'Escape') {
     const openedModal = document.querySelector('.modal_opened');
-    toggleModal(openedModal);
+    closeModals(openedModal);
   } 
 }
 
-function keyEnter(evt) {
-  if (evt.key === 'Enter') {
-    saveAddModal(evt);
-  }
-}
-
 function openEditModal() {
-  toggleModal(editModal);
+  openModals(editModal);
   nameFormEdit.value = nameText.innerText;
   professionFormEdit.value = professionText.innerText;
   resetForm(editModal, editFormButton);
-}
-
-function closeEditModal() {
-  toggleModal(editModal);
 }
 
 function saveEditModal(evt) {
   evt.preventDefault();
   nameText.textContent = nameFormEdit.value;
   professionText.textContent = professionFormEdit.value;
-  toggleModal(editModal);
+  closeModals(editModal);
 }
 
 function clearValue() {
@@ -112,29 +106,17 @@ function clearValue() {
 }
 
 function openAddModal() {
-  toggleModal(addModal);
+  openModals(addModal);
   clearValue();
   resetForm(addModal, addFormButton);
-}
-
-function closeAddModal() {
-  toggleModal(addModal);
 }
 
 function saveAddModal(evt) {
   evt.preventDefault();
   const card = newCard(linkPlaceFormAdd.value, placeFormAdd.value);
   addCard(card);
-  closeAddModal();
+  closeModals(addModal);
   clearValue();
-}
-
-function openPhotoModal() {
-  toggleModal(photoModal);
-}
-
-function closePhotoModal() {
-  toggleModal(photoModal);
 }
 
 function photoElement(evt) {
@@ -142,12 +124,19 @@ function photoElement(evt) {
   textPhoto.textContent = evt.target.getAttribute('alt');
 }
 
+
 openEditButton.addEventListener('click', openEditModal);
-closeEditButton.addEventListener('click', closeEditModal);
+closeEditButton.addEventListener('click', function () {
+  closeModals(editModal);
+});
 formEditModal.addEventListener('submit', saveEditModal);
 
 openAddButton.addEventListener('click', openAddModal);
-closeAddButton.addEventListener('click', closeAddModal);
+closeAddButton.addEventListener('click', function () {
+  closeModals(addModal);
+});
 formAddModal.addEventListener('submit', saveAddModal);
 
-closePhotoButton.addEventListener('click', closePhotoModal);
+closePhotoButton.addEventListener('click', function () {
+  closeModals(photoModal);
+});
