@@ -1,33 +1,22 @@
 import {
-  openEditButton,
-  closeEditButton,
-  editModal,
-  editFormButton,
-  openAddButton,
-  closeAddButton,
-  addModal,
-  addFormButton,
-  closePhotoButton,
-  photoModal,
-  openPhoto,
-  textPhoto,
-  nameText,
-  professionText,
-  elementTemplate,
-  elementContainer,
-  formAddModal,
-  placeFormAdd,
-  linkPlaceFormAdd,
-  formEditModal,
-  nameFormEdit,
-  professionFormEdit
+  openEditButton, closeEditButton, editModal, editFormButton,
+  openAddButton, closeAddButton, addModal, addFormButton,
+  closePhotoButton, photoModal, openPhoto, textPhoto,
+  nameText, professionText, elementTemplate, elementContainer,
+  formAddModal, placeFormAdd, linkPlaceFormAdd, formEditModal,
+  nameFormEdit, professionFormEdit, obj
   } from './constants.js';
 import { initialCards } from './initial-cards.js';
+import { openModals, closeModals, closeOnOverlay, keyEscapeHandler } from './utils.js';
 import { Card } from './Card.js';
-import { obj, FormValidator } from './FormValidator.js';
+import { FormValidator } from './FormValidator.js';
+
+const editFormValidator = new FormValidator(obj, formEditModal);
+const addFormValidator = new FormValidator(obj, formAddModal);
+
 
 initialCards.forEach(function (item) {
-  const arrCard = new Card(item.link, item.name);
+  const arrCard = new Card(item.link, item.name, '#element-template');
   elementContainer.append(arrCard.newCard());
 });
 
@@ -39,7 +28,7 @@ function openEditModal() {
   openModals(editModal);
   nameFormEdit.value = nameText.innerText;
   professionFormEdit.value = professionText.innerText;
-  new FormValidator(obj, formEditModal).resetForm(editFormButton);
+  editFormValidator.resetForm(editFormButton);
 }
 
 function saveEditModal(evt) {
@@ -56,45 +45,19 @@ function clearValue() {
 function openAddModal() {
   openModals(addModal);
   clearValue();
-  new FormValidator(obj, formAddModal).resetForm(addFormButton);
+  addFormValidator.resetForm(addFormButton);
 }
 
 function saveAddModal(evt) {
   evt.preventDefault();
-  const card = new Card(linkPlaceFormAdd.value, placeFormAdd.value).newCard();
+  const card = new Card(linkPlaceFormAdd.value, placeFormAdd.value, '#element-template').newCard();
   addCard(card);
   closeModals(addModal);
   clearValue();
 }
 
-function openModals(modal) {
-  modal.classList.add('modal_opened');
-  document.addEventListener('keydown', keyEscapeHandler);
-  document.addEventListener('click', closeOnOverlay);
-}
-
-function closeModals(modal) {
-  modal.classList.remove('modal_opened');
-  document.removeEventListener('keydown', keyEscapeHandler);
-  document.removeEventListener('click', closeOnOverlay);
-}
-
-function closeOnOverlay(evt) {
-  const openedModal = document.querySelector('.modal_opened');
-  if ( evt.target === openedModal) { 
-    closeModals(openedModal);
-  } 
-}
-
-function keyEscapeHandler(evt) {
-  if (evt.key === 'Escape') {
-    const openedModal = document.querySelector('.modal_opened');
-    closeModals(openedModal);
-  } 
-}
-
-new FormValidator(obj, formEditModal).enableValidation();
-new FormValidator(obj, formAddModal).enableValidation();
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
 
 openEditButton.addEventListener('click', openEditModal);
 closeEditButton.addEventListener('click', function () {

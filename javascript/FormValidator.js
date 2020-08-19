@@ -1,6 +1,4 @@
-import { obj } from './objFormValidator.js';
-
-class FormValidator {
+export class FormValidator {
   constructor(obj, formsElement) {
     this._obj = obj;
     this._formsElement = formsElement;
@@ -74,6 +72,4 @@ class FormValidator {
     errorElement.classList.remove(this._obj.errorClass);
     errorElement.textContent = '';
   }
-}
-
-export { obj, FormValidator };
+} 

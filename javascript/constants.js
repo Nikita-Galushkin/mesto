@@ -27,27 +27,20 @@ const formEditModal = document.forms.modal_edit_form;
 const nameFormEdit = formEditModal.elements.name;
 const professionFormEdit = formEditModal.elements.profession;
 
-export {
-openEditButton,
-closeEditButton,
-editModal,
-editFormButton,
-openAddButton,
-closeAddButton,
-addModal,
-addFormButton,
-closePhotoButton,
-photoModal,
-openPhoto,
-textPhoto,
-nameText,
-professionText,
-elementTemplate,
-elementContainer,
-formAddModal,
-placeFormAdd,
-linkPlaceFormAdd,
-formEditModal,
-nameFormEdit,
-professionFormEdit
+const obj = {
+  formSelector: '.modal__form',
+  inputSelector: '.modal__item',
+  buttonSubmitSelector: '.modal__button',
+  errorClass: 'modal__item-error_active',
+  buttonDisabledClass: 'modal__button_disabled',
+  inputTypeErrorClass: 'modal__item_type_error'
 };
+
+export {
+  openEditButton, closeEditButton, editModal, editFormButton,
+  openAddButton, closeAddButton, addModal, addFormButton,
+  closePhotoButton, photoModal, openPhoto, textPhoto,
+  nameText, professionText, elementTemplate, elementContainer,
+  formAddModal, placeFormAdd, linkPlaceFormAdd, formEditModal,
+  nameFormEdit, professionFormEdit, obj
+  };
