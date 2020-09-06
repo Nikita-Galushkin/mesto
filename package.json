@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rm -rf dist && webpack --mode production",
-    "dev": "webpack-dev-server --open --watch --mode development"
+    "dev": "webpack-dev-server --open --watch --mode development",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -39,6 +40,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.11.5",
-    "core-js": "^3.6.5"
+    "core-js": "^3.6.5",
+    "gh-pages": "^3.1.0"
   }
 }
