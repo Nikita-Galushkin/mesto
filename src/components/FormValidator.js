@@ -4,7 +4,8 @@ export class FormValidator {
     this._formsElement = formsElement;
   }
 
-  resetForm(modalButton) {
+  resetForm() {
+    const modalButton = this._formsElement.querySelector(this._obj.buttonSubmitSelector);
   const inputs = Array.from(this._formsElement.querySelectorAll('.modal__item'));
   inputs.forEach((inputsElement) => {
     inputsElement.classList.remove('modal__item_type_error');

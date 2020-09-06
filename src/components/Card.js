@@ -1,18 +1,9 @@
-import {
-  openEditButton, closeEditButton, editModal, editFormButton,
-  openAddButton, closeAddButton, addModal, addFormButton,
-  closePhotoButton, photoModal, openPhoto, textPhoto,
-  nameText, professionText, elementTemplate, elementContainer,
-  formAddModal, placeFormAdd, linkPlaceFormAdd, formEditModal,
-  nameFormEdit, professionFormEdit, obj
-  } from './constants.js';
-  import { openModals, closeModals, closeOnOverlay, keyEscapeHandler } from './utils.js';
-
 export class Card {
-  constructor(link, name, elementTemplate) {
-    this._link = link;
-    this._name = name;
+  constructor({ data, handleCardClick }, elementTemplate) {
+    this._link = data.link;
+    this._name = data.name;
     this._elementTemplate = elementTemplate;
+    this._handleCardClick = handleCardClick;
   }
   
   newCard() {
@@ -38,22 +29,15 @@ export class Card {
       this._removeElement();
     });
     elementPhoto.addEventListener('click', () => {
-      this._photoElement()
-    });
-    elementPhoto.addEventListener('click', () => {
-      openModals(photoModal);
+      this._handleCardClick();
     });
   }
+
   _toggleLike() {
     this._view.querySelector('.element__group').classList.toggle('element__group_active');
   }
 
   _removeElement() {
     this._view.remove();
-  }
-
-  _photoElement() {
-    openPhoto.src = this._link;
-    textPhoto.textContent = this._name;
   }
 }
