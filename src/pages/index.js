@@ -59,16 +59,18 @@ function openEditModal() {
   const userInfo = classUserInfo.getUserInfo();
   nameFormEdit.value = userInfo.name;
   professionFormEdit.value = userInfo.profession;
-  classEditForm.setEventListeners();
   classEditForm.open();
   editFormValidator.resetForm();
 }
 
 function openAddModal() {
   addFormValidator.resetForm();
-  classAddForm.setEventListeners();
   classAddForm.open();
 }
+
+classEditForm.setEventListeners();
+classAddForm.setEventListeners();
+classPopupPhoto.setEventListeners();
 
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
