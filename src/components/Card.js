@@ -39,5 +39,6 @@ export class Card {
 
   _removeElement() {
     this._view.remove();
+    this._view = null;
   }
 }

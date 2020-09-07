@@ -1,27 +1,25 @@
-// import { formAddModal } from '../utils/constants.js';
 import { Popup } from './Popup.js';
 
 export class PopupWithForm extends Popup {
   constructor({ modalSelector, handleSubmitForm }) {
     super(modalSelector);
     this._handleSubmitForm = handleSubmitForm;
-    this._formModal = document.forms.modal_add_form;
+    this._formModal = this._modalSelector.querySelector('.modal__form');
     this._submitListenerCallback = (evt) => {
       evt.preventDefault();
-      this.closeModals();
+      this._handleSubmitForm(this._getInputValues());
+      this.close();
     };
   }
 
   setEventListeners() {
     super.setEventListeners();
-    this._handleSubmitForm(this._getInputValues());
-    this._formModal.addEventListener('submit', this._submitListenerCallback);
-    }
+    this._modalSelector.addEventListener('submit', this._submitListenerCallback);
+  }
 
-  closeModals() {
-    super.closeModals();
+  close() {
+    super.close();
     this._formModal.reset();
-    this._formModal.removeEventListener('submit', this._submitListenerCallback);
   }
 
   _getInputValues() {

@@ -4,25 +4,24 @@ export class Popup {
     this._handleEscClose = (evt) => {
       if (evt.key === 'Escape') {
         const openedModal = document.querySelector('.modal_opened');
-        this.closeModals();
+        this.close();
       } 
     };
     this._closeOnOverlay = (evt) => {
       const openedModal = document.querySelector('.modal_opened');
       if (evt.target === openedModal) {
-        this.closeModals();
+        this.close();
       } 
     };
   }
 
-  openModals() {
+  open() {
     this._modalSelector.classList.add('modal_opened');
-    this.setEventListeners();
     document.addEventListener('keydown', this._handleEscClose);
     document.addEventListener('click', this._closeOnOverlay);
   }
 
-  closeModals() {
+  close() {
     this._modalSelector.classList.remove('modal_opened');
     document.removeEventListener('keydown', this._handleEscClose);
     document.removeEventListener('click', this._closeOnOverlay);
@@ -30,7 +29,7 @@ export class Popup {
 
   setEventListeners() {
     this._modalSelector.querySelector('.modal__close-button').addEventListener('click', () => {
-      this.closeModals();
+      this.close();
     });
   }
 }

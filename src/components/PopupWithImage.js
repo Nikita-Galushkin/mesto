@@ -1,4 +1,4 @@
-import { openPhoto, textPhoto } from '../utils/constants.js';
+import { openPhoto, textPhoto } from '../utils/elements.js';
 import { Popup } from './Popup.js';
 
 export class PopupWithImage extends Popup {
@@ -6,9 +6,10 @@ export class PopupWithImage extends Popup {
     super(modalSelector);
   }
 
-  openModals(link, name) {
+  open(link, name) {
     openPhoto.src = link;
+    openPhoto.alt = name;
     textPhoto.textContent = name;
-    super.openModals();
+    super.open();
   }
 }

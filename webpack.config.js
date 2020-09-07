@@ -22,10 +22,18 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, { loader: 'css-loader', options: { importLoaders: 1 } }, 'postcss-loader'],
       },
       {
-        test: /\.(png|jpe?g|gif|woff|woff2|svg)$/i,
+        test: /\.(png|svg|jpg|gif)$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: 'file-loader?name=./images/[name].[ext]',
+          },
+        ],
+      },
+      {
+        test: /\.(eot|ttf|woff|woff2)$/,
+        use: [
+          {
+            loader: 'file-loader?name=./vendor/[name].[ext]',
           },
         ],
       },
