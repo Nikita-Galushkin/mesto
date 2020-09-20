@@ -13,11 +13,18 @@ const photoModal = document.querySelector('.modal_type_photo');
 const openPhoto = document.querySelector('.modal__photo');
 const textPhoto = document.querySelector('.modal__text');
 
+const openAvatarButton = document.querySelector('.profile__image-button');
+const avatarModal = document.querySelector('.modal_type_update-avatar');
+const avatarImage = document.querySelector('.profile__image');
+
+const confirmModal = document.querySelector('.modal_type_confirm');
+
 const nameText = document.querySelector('.profile__title');
-const professionText = document.querySelector('.profile__subtitle');
+const aboutText = document.querySelector('.profile__subtitle');
 
 const elementTemplate = document.querySelector('#element-template').content;
 const elementContainer = document.querySelector('.elements__list');
+const likeCounter = document.querySelector('.element__counter');
 
 const formAddModal = document.forms.modal_add_form;
 const placeFormAdd = formAddModal.elements.place;
@@ -25,7 +32,10 @@ const linkPlaceFormAdd = formAddModal.elements.link_place;
 
 const formEditModal = document.forms.modal_edit_form;
 const nameFormEdit = formEditModal.elements.name;
-const professionFormEdit = formEditModal.elements.profession;
+const aboutFormEdit = formEditModal.elements.about;
+
+const formAvatarModal = document.forms.modal_avatar_form;
+const avatarFormButton = formAvatarModal.querySelector('.modal__button');
 
 const obj = {
   formSelector: '.modal__form',
@@ -40,7 +50,8 @@ export {
   openEditButton, closeEditButton, editModal, editFormButton,
   openAddButton, closeAddButton, addModal, addFormButton,
   closePhotoButton, photoModal, openPhoto, textPhoto,
-  nameText, professionText, elementTemplate, elementContainer,
+  nameText, aboutText, elementTemplate, elementContainer,
   formAddModal, placeFormAdd, linkPlaceFormAdd, formEditModal,
-  nameFormEdit, professionFormEdit, obj
+  nameFormEdit, aboutFormEdit, formAvatarModal, openAvatarButton,
+  avatarModal, confirmModal, avatarImage, likeCounter, avatarFormButton, obj
   };

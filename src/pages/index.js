@@ -2,63 +2,128 @@ import {
   openEditButton, closeEditButton, editModal, editFormButton,
   openAddButton, closeAddButton, addModal, addFormButton,
   closePhotoButton, photoModal, openPhoto, textPhoto,
-  nameText, professionText, elementTemplate, elementContainer,
+  nameText, aboutText, elementTemplate, elementContainer,
   formAddModal, placeFormAdd, linkPlaceFormAdd, formEditModal,
-  nameFormEdit, professionFormEdit, obj
+  nameFormEdit, aboutFormEdit, formAvatarModal, openAvatarButton,
+  avatarModal, confirmModal, avatarImage, likeCounter, avatarFormButton, obj
   } from '../utils/elements.js';
-import { initialCards } from '../utils/initial-cards.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
+import { ConfirmPopup } from '../components/ConfirmPopup.js';
+import { Api } from '../components/Api.js';
 
 import './index.css'
 
+const renderLoading = (button, isLoading, textButton) => {
+  if(isLoading) {
+      button.setAttribute('disabled', true);
+      button.textContent = textButton;
+  } else {
+      button.removeAttribute('disabled');
+      button.textContent = textButton;
+  }
+}
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-15/',
+  headers: {
+    authorization: 'fa7c1664-18f3-41d8-b132-37b50e07ed81',
+    'Content-Type': 'application/json'
+  }
+});
+
 const editFormValidator = new FormValidator(obj, formEditModal);
 const addFormValidator = new FormValidator(obj, formAddModal);
+const avatarFormValidator = new FormValidator(obj, formAvatarModal);
 
-const classUserInfo = new UserInfo({ nameText, professionText });
+const classUserInfo = new UserInfo({ nameText, aboutText, api });
 const classPopupPhoto = new PopupWithImage(photoModal);
+const classConfirmForm = new ConfirmPopup(confirmModal, renderLoading);
 
-function creatNewCard(elements) {
+
+let cardsList;
+
+classUserInfo.getUserProfile().then((id) => {
+  api.getInitialsCards()
+    .then((data) => {
+      cardsList = new Section({
+        items: data,
+        renderer: (cardItem) => {
+          creatNewCard(cardItem, id);
+          cardsList.addItem(creatNewCard(cardItem, id).newCard());
+        }},
+        elementContainer
+      );
+      cardsList.rendererItems();
+    })
+    .catch((err) => console.log(err));
+});
+
+function creatNewCard(elements, id) {
   const card = new Card({ data: elements,
     handleCardClick: () => {
       classPopupPhoto.open(elements.link, elements.name);
-    }
+    },
+    handleRemoveClick: (cardId, element, api) => {
+      classConfirmForm.open(cardId, element, api);
+    },
+    api,
+    myId: id
   }, '#element-template');
   return card;
-};
-
-const cardsList = new Section({
-  items: initialCards,
-  renderer: (cardItem) => {
-    creatNewCard(cardItem);
-    cardsList.addItem(creatNewCard(cardItem).newCard());
-  }},
-  elementContainer
-);
+}
 
 const classAddForm = new PopupWithForm({
   modalSelector: addModal,
   handleSubmitForm: (formData) => {
-    creatNewCard(formData);
-    cardsList.addNewCard(creatNewCard(formData).newCard());
+    renderLoading(addFormButton, true, 'Создание...');
+    api.postCard(formData).then((data) =>{
+      creatNewCard(data, data.owner._id);
+      cardsList.addNewCard(creatNewCard(data, data.owner._id).newCard());
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      renderLoading(addFormButton, false, 'Создать');
+    });
   }
 });
 
 const classEditForm = new PopupWithForm({
   modalSelector: editModal,
   handleSubmitForm: (formData) => {
-    classUserInfo.setUserInfo(formData);
+    renderLoading(editFormButton, true, 'Сохранение...');
+    api.patchUserInfo(formData).then(() =>{
+      classUserInfo.setUserInfo(formData);
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      renderLoading(editFormButton, false, 'Сохранить');
+    });
+  }
+});
+
+const classAvatarForm = new PopupWithForm({
+  modalSelector: avatarModal,
+  handleSubmitForm: (formData) => {
+    renderLoading(avatarFormButton, true, 'Сохранение...');
+    api.patchUserAvatar(formData).then((formData) => {
+      classUserInfo.setUserAvatar(formData.avatar);
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      renderLoading(avatarFormButton, false, 'Сохранить');
+    });
   }
 });
 
 function openEditModal() {
   const userInfo = classUserInfo.getUserInfo();
   nameFormEdit.value = userInfo.name;
-  professionFormEdit.value = userInfo.profession;
+  aboutFormEdit.value = userInfo.about;
   classEditForm.open();
   editFormValidator.resetForm();
 }
@@ -68,13 +133,21 @@ function openAddModal() {
   classAddForm.open();
 }
 
+function openAvatarModal() {
+  avatarFormValidator.resetForm();
+  classAvatarForm.open();
+}
+
 classEditForm.setEventListeners();
 classAddForm.setEventListeners();
 classPopupPhoto.setEventListeners();
+classAvatarForm.setEventListeners();
+classConfirmForm.setEventListeners();
 
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
-cardsList.rendererItems();
+avatarFormValidator.enableValidation();
 
 openEditButton.addEventListener('click', openEditModal);
 openAddButton.addEventListener('click', openAddModal);
+openAvatarButton.addEventListener('click', openAvatarModal);

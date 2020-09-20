@@ -14,6 +14,7 @@
   right: 15px;
   padding: 0;
   transition: 0.3s 0s opacity ease-in;
+  display: none;
 }
 
 .element__trash:focus {

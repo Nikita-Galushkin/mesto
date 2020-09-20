@@ -8,7 +8,6 @@
     <meta name="keywords" content="html, css, js">
     <meta name="author" content="Никита Галушкин">
     <title>Mesto Russia</title>
-    <!-- <link rel="stylesheet" href="./pages/index.css"> -->
   </head>
   <body class="page">
     <!--page__container-->
@@ -24,14 +23,17 @@
         <!--section profile-->
         <section class="profile section content__section">
           <div class="profile__info">
-          <img src="./images/profile-image.jpg" alt="фото" class="profile__image">
-          <div class="profile__edit">
-            <div class="profile__text">
-              <h1 class="profile__title">Жак-Ив Кусто</h1>
-              <p class="profile__subtitle">Исследователь океана</p>
+            <button class="profile__image-button" type="button">
+              <div class="profile__icon"></div>
+              <img src="./images/profile-image.jpg" alt="фото" class="profile__image">
+            </button>
+            <div class="profile__edit">
+              <div class="profile__text">
+                <h1 class="profile__title">Жак-Ив Кусто</h1>
+                <p class="profile__subtitle">Исследователь океана</p>
+              </div>
+              <button class="profile__edit-button" type="button"></button>
             </div>
-            <button class="profile__edit-button" type="button"></button>
-          </div>
           </div>
           <button class="profile__add-button" type="button"></button>
         </section>
@@ -53,44 +55,45 @@
     </div>
     <!--page__container end-->
     <!--modal-->
+    <!-- modal edit-profile -->
     <div class="modal modal_type_edit-profile">
       <div class="modal__container">
         <button class="modal__close-button modal__close-button_type_edit" type="button"></button>
         <h2 class="modal__title">Редактировать профиль</h2>
         <form class="modal__form" action="#" name="modal_edit_form" novalidate>
-          <!-- <fieldset class="modal__input-container"> -->
-            <label>
+          <label>
             <input type="text" class="modal__item modal__item_type_name" name="name" value="Жак-Ив Кусто" placeholder="ФИО" required minlength="2" maxlength="40">
             <span id="name-error" class="modal__item-error"></span>
-            </label>
-            <label>
-            <input type="text" class="modal__item modal__item_type_profession" name="profession" value="Исследователь океана" placeholder="Профессия" required minlength="2" maxlength="200">
-            <span id="profession-error" class="modal__item-error"></span>
-            </label>
-            <button type="submit" class="modal__button modal__button_action">Сохранить</button>
-          <!-- </fieldset> -->
+          </label>
+          <label>
+            <input type="text" class="modal__item modal__item_type_profession" name="about" value="Исследователь океана" placeholder="Профессия" required minlength="2" maxlength="200">
+            <span id="about-error" class="modal__item-error"></span>
+          </label>
+          <button type="submit" class="modal__button modal__button_action">Сохранить</button>
         </form>
       </div>
     </div>
+    <!-- modal edit-profile end -->
+    <!-- modal add-card -->
     <div class="modal modal_type_add-card">
       <div class="modal__container">
         <button class="modal__close-button modal__close-button_type_add" type="button"></button>
         <h2 class="modal__title">Новое место</h2>
         <form class="modal__form" action="#" name="modal_add_form" novalidate>
-          <!-- <fieldset class="modal__input-container"> -->
-            <label>
+          <label>
             <input type="text" class="modal__item modal__item_type_place" name="name" value="" placeholder="Название" required minlength="1" maxlength="30">
             <span id="name-error" class="modal__item-error"></span>
-            </label>
-            <label>
+          </label>
+          <label>
             <input type="url" class="modal__item modal__item_type_link-place" name="link" value="" placeholder="Ссылка на картинку" required>
             <span id="link-error" class="modal__item-error"></span>
-            </label>
-            <button type="submit" class="modal__button modal__button_action modal__button_disabled" disabled>Создать</button>
-          <!-- </fieldset> -->
+          </label>
+          <button type="submit" class="modal__button modal__button_action modal__button_disabled" disabled>Создать</button>
         </form>
       </div>
     </div>
+    <!-- modal add-card end -->
+    <!-- modal photo -->
     <div class="modal modal_type_photo">
       <div class="modal__container-photo">
         <button class="modal__close-button modal__close-button_type_photo" type="button"></button>
@@ -98,6 +101,31 @@
         <p class="modal__text">Фото</p>
       </div>
     </div>
+    <!-- modal photo end -->
+    <!-- modal confirm -->
+    <div class="modal modal_type_confirm">
+      <div class="modal__container modal__container_type_confirm">
+        <button class="modal__close-button modal__close-button_type_confirm" type="button"></button>
+        <h2 class="modal__title modal__title_type_confirm">Вы уверены?</h2>
+        <button type="submit" class="modal__button modal__button_type_confirm modal__button_action">Да</button>
+      </div>
+    </div>
+    <!-- modal confirm end -->
+    <!-- modal update-avatar -->
+    <div class="modal modal_type_update-avatar">
+      <div class="modal__container">
+        <button class="modal__close-button modal__close-button_type_update" type="button"></button>
+        <h2 class="modal__title">Обновить аватар</h2>
+        <form class="modal__form" action="#" name="modal_avatar_form" novalidate>
+          <label>
+            <input type="url" class="modal__item modal__item_type_avatar" name="avatar" value="" placeholder="Ссылка на фото" required>
+            <span id="avatar-error" class="modal__item-error"></span>
+          </label>
+          <button type="submit" class="modal__button modal__button_action">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <!-- modal update-avatar end -->
     <!--modal end-->
     <!--template-->
     <template id="element-template">
@@ -105,12 +133,16 @@
         <button class="element__photo" type="button">
           <img src="#" alt="фото" class="element__image">
         </button>
-        <h2 class="element__title"></h2>
-        <button class="element__group" type="button"></button>
-        <button class="element__trash" type="button"></button>
+        <div class="element__info-container">
+          <h2 class="element__title"></h2>
+          <div class="element__like-container">
+            <button class="element__group" type="button"></button>
+            <p class="element__counter">234</p>
+          </div>
+        </div>
+        <button class="element__trash " type="button"></button>
       </li>
     </template>
     <!--template end-->
-    <!-- <script type="module" src="./pages/index.js"></script> -->
   </body>
 </html>

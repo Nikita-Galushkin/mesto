@@ -9,9 +9,6 @@
   background-repeat: no-repeat;
   background-color: transparent;
   cursor: pointer;
-  position: absolute;
-  bottom: 30px;
-  right: 30px;
   padding: 0;
   transition: 0.3s 0s opacity ease-in;
 }
