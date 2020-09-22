@@ -1,9 +1,8 @@
 import { Popup } from './Popup.js';
 
 export class ConfirmPopup extends Popup {
-  constructor(modalSelector, renderLoading) {
+  constructor(modalSelector) {
     super(modalSelector);
-    this._renderLoading = renderLoading;
     this._confirmFormButton = this._modalSelector.querySelector('.modal__button_type_confirm');
   }
 
@@ -23,7 +22,6 @@ export class ConfirmPopup extends Popup {
   }
 
   _removeElement() {
-    this._renderLoading(this._confirmFormButton, true, 'Удаление...');
     this._api
       .removeCard(this._cardId)
       .then(() => this._elements.remove())
@@ -32,8 +30,7 @@ export class ConfirmPopup extends Popup {
       })
       .catch((err) => console.log(err))
       .finally(() => {
-        this._renderLoading(this._confirmFormButton, false, 'Да');
+        this.close();
       });
-    this.close();
   }
 }

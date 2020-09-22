@@ -20,18 +20,10 @@ export class Card {
     this._view.querySelector('.element__title').textContent = this._name;
     this._view.querySelector('.element__counter').textContent = this._likeCounter.length;
     this._setEventListeners();
-
     if (this._ownerId === this._myId) {
       this._view.querySelector('.element__trash').classList.add('element__trash_active');
     }
-
     this.isLike();
-    // this._likeCounter.some((item) => {
-    //   if (item._id === this._myId) {
-    //       this._view.querySelector('.element__group').classList.add('element__group_active')
-    //   }
-    // })
-
     return this._view;
   }
 

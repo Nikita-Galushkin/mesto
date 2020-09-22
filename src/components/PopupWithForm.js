@@ -8,7 +8,6 @@ export class PopupWithForm extends Popup {
     this._submitListenerCallback = (evt) => {
       evt.preventDefault();
       this._handleSubmitForm(this._getInputValues());
-      this.close();
     };
   }
 
@@ -29,5 +28,16 @@ export class PopupWithForm extends Popup {
       formValues[input.name] = input.value;
     });
     return formValues;
+  }
+
+
+  renderLoading(button, isLoading, textButton) {
+    if (isLoading) {
+      button.setAttribute('disabled', true);
+      button.textContent = textButton;
+    } else {
+      button.removeAttribute('disabled');
+      button.textContent = textButton;
+    }
   }
 }
