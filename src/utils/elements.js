@@ -10,7 +10,6 @@ const addFormButton = addModal.querySelector('.modal__button_action');
 
 const closePhotoButton = document.querySelector('.modal__close-button_type_photo');
 const photoModal = document.querySelector('.modal_type_photo');
-const openPhoto = document.querySelector('.modal__photo');
 const textPhoto = document.querySelector('.modal__text');
 
 const openAvatarButton = document.querySelector('.profile__image-button');
@@ -49,7 +48,7 @@ const obj = {
 export {
   openEditButton, closeEditButton, editModal, editFormButton,
   openAddButton, closeAddButton, addModal, addFormButton,
-  closePhotoButton, photoModal, openPhoto, textPhoto,
+  closePhotoButton, photoModal, textPhoto,
   nameText, aboutText, elementTemplate, elementContainer,
   formAddModal, placeFormAdd, linkPlaceFormAdd, formEditModal,
   nameFormEdit, aboutFormEdit, formAvatarModal, openAvatarButton,

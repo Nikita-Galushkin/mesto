@@ -1,9 +1,9 @@
 import { Popup } from './Popup.js';
 
 export class ConfirmPopup extends Popup {
-  constructor(modalSelector) {
-    super(modalSelector);
-    this._confirmFormButton = this._modalSelector.querySelector('.modal__button_type_confirm');
+  constructor(modalElement) {
+    super(modalElement);
+    this._confirmFormButton = this._modalElement.querySelector('.modal__button_type_confirm');
   }
 
   setEventListeners() {
@@ -25,9 +25,6 @@ export class ConfirmPopup extends Popup {
     this._api
       .removeCard(this._cardId)
       .then(() => this._elements.remove())
-      .finally(() => {
-        this.close();
-      })
       .catch((err) => console.log(err))
       .finally(() => {
         this.close();

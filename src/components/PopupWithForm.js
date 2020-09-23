@@ -1,19 +1,21 @@
 import { Popup } from './Popup.js';
 
 export class PopupWithForm extends Popup {
-  constructor({ modalSelector, handleSubmitForm }) {
-    super(modalSelector);
+  constructor({ modalElement, handleSubmitForm }) {
+    super(modalElement);
     this._handleSubmitForm = handleSubmitForm;
-    this._formModal = this._modalSelector.querySelector('.modal__form');
+    this._formModal = this._modalElement.querySelector('.modal__form');
     this._submitListenerCallback = (evt) => {
       evt.preventDefault();
       this._handleSubmitForm(this._getInputValues());
     };
+    this._submitButton = this._modalElement.querySelector('.modal__button');
+    this._submit
   }
 
   setEventListeners() {
     super.setEventListeners();
-    this._modalSelector.addEventListener('submit', this._submitListenerCallback);
+    this._modalElement.addEventListener('submit', this._submitListenerCallback);
   }
 
   close() {
@@ -22,7 +24,7 @@ export class PopupWithForm extends Popup {
   }
 
   _getInputValues() {
-    const inputList = this._modalSelector.querySelectorAll('.modal__item');
+    const inputList = this._modalElement.querySelectorAll('.modal__item');
     const formValues = {};
     inputList.forEach (input => {
       formValues[input.name] = input.value;
@@ -31,13 +33,13 @@ export class PopupWithForm extends Popup {
   }
 
 
-  renderLoading(button, isLoading, textButton) {
+  renderLoading(isLoading, textButton) {
     if (isLoading) {
-      button.setAttribute('disabled', true);
-      button.textContent = textButton;
+      this._submitButton.setAttribute('disabled', true);
+      this._submitButton.textContent = textButton;
     } else {
-      button.removeAttribute('disabled');
-      button.textContent = textButton;
+      this._submitButton.removeAttribute('disabled');
+      this._submitButton.textContent = textButton;
     }
   }
 }

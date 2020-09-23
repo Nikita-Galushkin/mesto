@@ -1,6 +1,6 @@
 export class Popup {
-  constructor(modalSelector) {
-    this._modalSelector = modalSelector;
+  constructor(modalElement) {
+    this._modalElement = modalElement;
     this._handleEscClose = (evt) => {
       if (evt.key === 'Escape') {
         const openedModal = document.querySelector('.modal_opened');
@@ -16,19 +16,19 @@ export class Popup {
   }
 
   open() {
-    this._modalSelector.classList.add('modal_opened');
+    this._modalElement.classList.add('modal_opened');
     document.addEventListener('keydown', this._handleEscClose);
     document.addEventListener('click', this._closeOnOverlay);
   }
 
   close() {
-    this._modalSelector.classList.remove('modal_opened');
+    this._modalElement.classList.remove('modal_opened');
     document.removeEventListener('keydown', this._handleEscClose);
     document.removeEventListener('click', this._closeOnOverlay);
   }
 
   setEventListeners() {
-    this._modalSelector.querySelector('.modal__close-button').addEventListener('click', () => {
+    this._modalElement.querySelector('.modal__close-button').addEventListener('click', () => {
       this.close();
     });
   }

@@ -1,7 +1,7 @@
 import {
   openEditButton, closeEditButton, editModal, editFormButton,
   openAddButton, closeAddButton, addModal, addFormButton,
-  closePhotoButton, photoModal, openPhoto, textPhoto,
+  closePhotoButton, photoModal, textPhoto,
   nameText, aboutText, elementTemplate, elementContainer,
   formAddModal, placeFormAdd, linkPlaceFormAdd, formEditModal,
   nameFormEdit, aboutFormEdit, formAvatarModal, openAvatarButton,
@@ -31,7 +31,7 @@ const addFormValidator = new FormValidator(obj, formAddModal);
 const avatarFormValidator = new FormValidator(obj, formAvatarModal);
 
 const classUserInfo = new UserInfo({ nameText, aboutText, avatarImage });
-const classPopupPhoto = new PopupWithImage(photoModal, openPhoto, textPhoto);
+const classPopupPhoto = new PopupWithImage(photoModal, textPhoto);
 const classConfirmForm = new ConfirmPopup(confirmModal);
 
 let cardsList;
@@ -73,46 +73,46 @@ function creatNewCard(elements, id) {
 }
 
 const classAddForm = new PopupWithForm({
-  modalSelector: addModal,
+  modalElement: addModal,
   handleSubmitForm: (formData) => {
-    classAddForm.renderLoading(addFormButton, true, 'Создание...');
+    classAddForm.renderLoading(true, 'Создание...');
     api.postCard(formData).then((data) =>{
       creatNewCard(data, data.owner._id);
       cardsList.addNewCard(creatNewCard(data, data.owner._id).newCard());
     })
     .catch((err) => console.log(err))
     .finally(() => {
-      classAddForm.renderLoading(addFormButton, false, 'Создать');
+      classAddForm.renderLoading(false, 'Создать');
       classAddForm.close();
     });
   }
 });
 
 const classEditForm = new PopupWithForm({
-  modalSelector: editModal,
+  modalElement: editModal,
   handleSubmitForm: (formData) => {
-    classEditForm.renderLoading(editFormButton, true, 'Сохранение...');
+    classEditForm.renderLoading(true, 'Сохранение...');
     api.patchUserInfo(formData).then(() =>{
       classUserInfo.setUserInfo(formData);
     })
     .catch((err) => console.log(err))
     .finally(() => {
-      classEditForm.renderLoading(editFormButton, false, 'Сохранить');
+      classEditForm.renderLoading(false, 'Сохранить');
       classEditForm.close();
     });
   }
 });
 
 const classAvatarForm = new PopupWithForm({
-  modalSelector: avatarModal,
+  modalElement: avatarModal,
   handleSubmitForm: (formData) => {
-    classAvatarForm.renderLoading(avatarFormButton, true, 'Сохранение...');
+    classAvatarForm.renderLoading(true, 'Сохранение...');
     api.patchUserAvatar(formData).then((formData) => {
       classUserInfo.setUserAvatar(formData.avatar);
     })
     .catch((err) => console.log(err))
     .finally(() => {
-      classAvatarForm.renderLoading(avatarFormButton, false, 'Сохранить');
+      classAvatarForm.renderLoading(false, 'Сохранить');
       classAvatarForm.close();
     });
   }
