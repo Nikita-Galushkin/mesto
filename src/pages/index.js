@@ -1,7 +1,7 @@
 import {
   openEditButton, closeEditButton, editModal, editFormButton,
   openAddButton, closeAddButton, addModal, addFormButton,
-  closePhotoButton, photoModal, textPhoto,
+  closePhotoButton, photoModal,
   nameText, aboutText, elementTemplate, elementContainer,
   formAddModal, placeFormAdd, linkPlaceFormAdd, formEditModal,
   nameFormEdit, aboutFormEdit, formAvatarModal, openAvatarButton,
@@ -31,7 +31,7 @@ const addFormValidator = new FormValidator(obj, formAddModal);
 const avatarFormValidator = new FormValidator(obj, formAvatarModal);
 
 const classUserInfo = new UserInfo({ nameText, aboutText, avatarImage });
-const classPopupPhoto = new PopupWithImage(photoModal, textPhoto);
+const classPopupPhoto = new PopupWithImage(photoModal);
 const classConfirmForm = new ConfirmPopup(confirmModal);
 
 let cardsList;

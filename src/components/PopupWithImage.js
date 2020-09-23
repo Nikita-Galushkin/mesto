@@ -1,10 +1,10 @@
 import { Popup } from './Popup.js';
 
 export class PopupWithImage extends Popup {
-  constructor(modalElement, text) {
+  constructor(modalElement) {
     super(modalElement);
     this._openPhoto = this._modalElement.querySelector('.modal__photo');
-    this._textPhoto = text;
+    this._textPhoto = this._modalElement.querySelector('.modal__text');;
   }
 
   open(link, name) {
